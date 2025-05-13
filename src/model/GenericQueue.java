@@ -67,4 +67,3 @@ public class GenericQueue<T> {
         return list;
     }
 }
-
