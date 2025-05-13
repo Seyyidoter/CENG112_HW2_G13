@@ -59,4 +59,3 @@ public class Ticket implements Comparable<Ticket> {
         return customerName + " - " + issueDescription + " [" + priority + "]";
     }
 }
-
