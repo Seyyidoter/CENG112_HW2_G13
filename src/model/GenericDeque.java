@@ -87,4 +87,3 @@ public class GenericDeque<T> {
         return list;
     }
 }
-
