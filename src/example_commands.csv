@@ -1,0 +1,22 @@
+new,John Doe,Internet not working,High
+new,Jane Smith,Payment issue,Low
+new,Mike Brown,Router problem,High
+new,Sarah Lee,Billing question,Medium
+new,Alan Turing,Service outage,High
+display,priority
+display,asc
+display,desc
+resolve
+resolve
+display,priority
+history
+history,asc
+history,desc
+new,Ada Lovelace,Slow connection,Medium
+new,Nikola Tesla,Frequent disconnections,High
+resolve
+resolve
+resolve
+history
+history,asc
+history,desc
