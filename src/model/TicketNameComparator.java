@@ -8,4 +8,3 @@ public class TicketNameComparator implements Comparator<Ticket> {
         return t1.getCustomerName().compareToIgnoreCase(t2.getCustomerName());
     }
 }
-
