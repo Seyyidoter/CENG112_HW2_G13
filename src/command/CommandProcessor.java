@@ -20,7 +20,7 @@ public class CommandProcessor {
     public void process(List<Command> commands) {
         for (Command cmd : commands) {
             String type = cmd.getType().toLowerCase(); 
-            // note: to avoid case sensivity
+            // note: to avoid case sensitivity
 
             switch (type) {
                 case "new":
@@ -30,9 +30,11 @@ public class CommandProcessor {
                         cmd.getIssueDescription(),
                         cmd.getPriority(),
                         System.currentTimeMillis()
-                        // not: cureent time
+                        // not: current time
                     );
-                    System.out.println("Added: " + ticket);
+                    System.out.println("Adding Ticket: " + ticket.getCustomerName()
+                    + " - " + ticket.getIssueDescription()
+                    + " [" + ticket.getPriority() + " Priority]");
                     activeTickets.offer(ticket); 
                     // not: add queue with priorities
                     break;
@@ -42,6 +44,7 @@ public class CommandProcessor {
                     Ticket resolved = activeTickets.poll();
                     // not: remove the highest
                     if (resolved != null) {
+                    	System.out.println("\nResolving Ticket:");
                         System.out.println("Resolved: " + resolved);
                         resolvedTickets.add(resolved); 
                         // not: resolved tickets go to history
@@ -53,39 +56,42 @@ public class CommandProcessor {
                 case "display":
                     // show active tickets
                     List<Ticket> list = activeTickets.getAll();
-                    String mode = cmd.getDisplayMode(); 
-
-                    System.out.println("--- Active Tickets (" + mode.toUpperCase() + ") ---");
+                    String mode = cmd.getDisplayMode();
 
                     if ("priority".equals(mode)) {
-                        Collections.sort(list); 
-                        // not: Ticket içinde compareTo var
+                        System.out.println("\n--- Displaying Active Tickets (By Priority) ---");
+                        Collections.sort(list); // Ticket implements Comparable by priority
                     } else if ("desc".equals(mode)) {
-                        Collections.reverse(list); 
-                        // not: LIFO
-                    } // asc: normal order
+                        System.out.println("\n--- Displaying Active Tickets (By DESC - Newest First) ---");
+                        list.sort(Comparator.comparingLong(Ticket::getArrivalTime).reversed());
+                    } else {
+                        System.out.println("\n--- Displaying Active Tickets (By ASC - Oldest First) ---");
+                        list.sort(Comparator.comparingLong(Ticket::getArrivalTime));
+                    }
 
                     printList(list);
                     break;
 
+                    
                 case "history":
-                    // show resolved tickets
+                	
                     List<Ticket> historyList = resolvedTickets.getAll();
                     String histMode = cmd.getDisplayMode();
 
                     if (histMode == null) {
-                        System.out.println("--- History (by name) ---");
+                        System.out.println("\n--- Resolved Ticket History (Sorted by Customer Name) ---");
                         historyList.sort(new TicketNameComparator());
-                        // not: sort name
                     } else if ("desc".equals(histMode)) {
-                        System.out.println("--- History (newest first) ---");
-                        Collections.reverse(historyList);
+                        System.out.println("\n--- Resolved Ticket History (DESC - Newest First) ---");
+                        historyList.sort(Comparator.comparingLong(Ticket::getArrivalTime).reversed());
                     } else {
-                        System.out.println("--- History (oldest first) ---");
+                        System.out.println("\n--- Resolved Ticket History (ASC - Oldest First) ---");
+                        historyList.sort(Comparator.comparingLong(Ticket::getArrivalTime));
                     }
 
                     printList(historyList);
                     break;
+
 
                 default:
                     // not valid
@@ -103,3 +109,4 @@ public class CommandProcessor {
         }
     }
 }
+
