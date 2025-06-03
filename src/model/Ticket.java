@@ -4,39 +4,43 @@ package model;
  * Ticket - Represents a customer service support ticket with priority and arrival time.
  * Implements Comparable to support sorting by priority and FIFO order.
  */
-
 public class Ticket implements Comparable<Ticket> {
     private String customerName;
     private String issueDescription;
-    private String priority; // "High", "Medium", "Low"
-    private long arrivalTime; // Timestamp or sequential counter
+    private String priority;
+    private long arrivalTime;
+    private long resolveTime; // Çözülme sırası için
 
-    // Constructs a Ticket with the specified fields.
     public Ticket(String customerName, String issueDescription, String priority, long arrivalTime) {
         this.customerName = customerName;
         this.issueDescription = issueDescription;
         this.priority = priority;
         this.arrivalTime = arrivalTime;
+        this.resolveTime = 0;
     }
 
-    // Returns the customer's name.
     public String getCustomerName() {
         return customerName;
     }
 
-    // Returns the issue description.
     public String getIssueDescription() {
         return issueDescription;
     }
 
-    // Returns the ticket's priority.
     public String getPriority() {
         return priority;
     }
 
-    // Returns the ticket's arrival time.
     public long getArrivalTime() {
         return arrivalTime;
+    }
+
+    public long getResolveTime() {
+        return resolveTime;
+    }
+
+    public void setResolveTime(long resolveTime) {
+        this.resolveTime = resolveTime;
     }
 
     /**
@@ -72,7 +76,6 @@ public class Ticket implements Comparable<Ticket> {
         }
     }
 
-    // Returns a readable string representation of the ticket.
     @Override
     public String toString() {
         return customerName + " - " + issueDescription + " [" + priority + "]";
