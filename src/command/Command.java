@@ -1,15 +1,15 @@
 package command;
 
-// command info holder
+// Command info holder
 public class Command {
 
-    private String type;              // command type
-    private String customerName;      // name
-    private String issueDescription;  // problem
+    private String type;              // Command type
+    private String customerName;      // Name
+    private String issueDescription;  // Problem
     private String priority;          // High, Medium, Low
-    private String displayMode;       // asc, desc, priority
+    private String displayMode;       // Asc, desc, priority
 
-    // new command
+    // New command
     public Command(String type, String customerName, String issueDescription, String priority) {
         this.type = type;
         this.customerName = customerName;
@@ -18,7 +18,7 @@ public class Command {
         this.displayMode = null;
     }
 
-    // display or history with mode
+    // Display or history with mode
     public Command(String type, String displayMode) {
         this.type = type;
         this.customerName = null;
@@ -27,7 +27,7 @@ public class Command {
         this.displayMode = displayMode;
     }
 
-    // resolve, display, history no mode
+    // Resolve, display, history no mode
     public Command(String type) {
         this.type = type;
         this.customerName = null;
@@ -36,29 +36,46 @@ public class Command {
         this.displayMode = null;
     }
 
-    // get type
+    // Get type
     public String getType() {
         return type;
     }
 
-    // get name
+    // Get name
     public String getCustomerName() {
         return customerName;
     }
 
-    // get problem
+    // Get problem
     public String getIssueDescription() {
         return issueDescription;
     }
 
-    // get priority
+    // Get priority
     public String getPriority() {
         return priority;
     }
 
-    // get display option
+    // Get display option
     public String getDisplayMode() {
         return displayMode;
     }
+
+    private long arrivalTime;
+
+    /**
+     * @return The arrival time timestamp
+     */
+    public long getArrivalTime() {
+        return arrivalTime;
+    }
+
+    /**
+    * Sets the arrival time for the command
+    */
+    public void setArrivalTime(long arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
 }
 
