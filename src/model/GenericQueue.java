@@ -77,4 +77,25 @@ public class GenericQueue<T> {
         }
         return list;
     }
+
+    public void remove(T item) {
+        Node current = front;
+        Node previous = null;
+
+        while (current != null) {
+            if (current.data.equals(item)) {
+                if (previous == null) {
+                    front = current.next;
+                    if (front == null) rear = null;
+                } else {
+                    previous.next = current.next;
+                    if (current == rear) rear = previous;
+                }
+                return;
+            }
+            previous = current;
+            current = current.next;
+        }
+    }
+
 }
