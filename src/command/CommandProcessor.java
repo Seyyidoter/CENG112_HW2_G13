@@ -40,7 +40,7 @@ public class CommandProcessor {
                     );
 
                     // Print confirmation message and add to active tickets queue
-                    System.out.println("\nAdding Ticket: " + ticket.getCustomerName()
+                    System.out.println("Adding Ticket: " + ticket.getCustomerName()
                             + " - " + ticket.getIssueDescription()
                             + " [" + ticket.getPriority() + " Priority]");
                     activeTickets.offer(ticket);
